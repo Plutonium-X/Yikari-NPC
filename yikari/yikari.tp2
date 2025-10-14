@@ -1,7 +1,7 @@
 //---------------------------------------
 //--------YIKARI, A MONK NPC MADE BY SHED
 //---------------------------------------
-//----------------------------Version 1.7
+//----------------------------Version 1.8.1
 
 BACKUP ~Yikari/backup~
 
@@ -11,6 +11,17 @@ AUTO_TRA ~Yikari/Translations/%s~
 
 ALLOW_MISSING ~AR0900.bcs~
 ALLOW_MISSING ~solak1.dlg~
+
+ALWAYS
+ ACTION_DEFINE_ARRAY tra_reload BEGIN setup END
+ LAF HANDLE_CHARSETS
+ INT_VAR
+ infer_charset = 1
+ STR_VAR
+ tra_path = EVAL ~%MOD_FOLDER%/Translations~
+ reload_array = tra_reload
+ END
+ END
 
 LANGUAGE ~English~ ~English~ ~Yikari/Translations/English/setup.tra~
 LANGUAGE ~French~ ~Francais~ ~Yikari/Translations/Francais/setup.tra~
@@ -61,7 +72,13 @@ SAY DESC @12
 
 //---------------------------------------PORTRAIT
 
-COPY ~Yikari/Graphics~ ~override~
+ACTION_IF GAME_IS ~TOB BGT~ THEN BEGIN 
+	COPY ~Yikari/Graphics~ ~override~
+END
+
+ACTION_IF GAME_IS ~BG2EE EET~ THEN BEGIN 
+	COPY ~Yikari/Graphics/EE~ ~override~
+END
 
 //---------------------------------------CREATURES
 
